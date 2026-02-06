@@ -1,0 +1,145 @@
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &.left {
+    align-items: flex-start;
+  }
+
+  &.right {
+    align-items: flex-end;
+  }
+}
+
+.label {
+  color: var(--text-label);
+  font-size: 10px;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.underline {
+  width: 60px;
+  height: 2px;
+  background: var(--border-color);
+  margin-top: 4px;
+}
+
+.sliderControl {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 120px;
+}
+
+.sliderLabel {
+  color: var(--text-label);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.sliderValue {
+  color: var(--text-primary);
+  font-size: 11px;
+  min-width: 40px;
+  text-align: right;
+}
+
+.toggleControl {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggleLabel {
+  color: var(--text-label);
+  font-size: 10px;
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  background: var(--border-color);
+  border: none;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &.checked {
+    background: var(--accent-color);
+  }
+}
+
+.toggleThumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.2s;
+
+  .checked & {
+    transform: translateX(20px);
+  }
+}
+
+.colorPicker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorLabel {
+  color: var(--text-label);
+  font-size: 10px;
+}
+
+.colorSwatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  cursor: pointer;
+  overflow: hidden;
+
+  input {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+}
+
+.textInput {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.textLabel {
+  color: var(--text-label);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.selectBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.selectLabel {
+  color: var(--text-label);
+  font-size: 10px;
+  text-transform: uppercase;
+}
