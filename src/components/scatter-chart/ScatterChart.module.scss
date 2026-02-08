@@ -1,0 +1,25 @@
+.wrapper {
+  flex: 1;
+  min-height: 300px;
+
+  * {
+    outline: none;
+  }
+}
+
+.tooltip {
+  background: var(--bg-header);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  color: #fff;
+}
+
+.tooltipTitle {
+  margin-bottom: 4px;
+  color: var(--accent-color);
+}
+
+.tooltipRow {
+  color: var(--text-label);
+  font-size: 10px;
+}

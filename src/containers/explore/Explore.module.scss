@@ -1,0 +1,143 @@
+@use '@/styles/breakpoints' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+
+  @include tablet {
+    flex-direction: row;
+  }
+}
+
+.viewToggle {
+  display: flex;
+  border-bottom: 1px solid var(--border-color);
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.toggleButton {
+  flex: 1;
+  padding: 10px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-label);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.toggleButtonActive {
+  color: var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+
+.hiddenOnMobile {
+  display: none !important;
+
+  @include tablet {
+    display: flex !important;
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+
+  @include tablet {
+    width: 320px;
+    flex: none;
+    border-right: 1px solid var(--border-color);
+  }
+}
+
+.searchBar {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-color);
+
+  @include tablet {
+    padding: 16px 24px;
+  }
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  background: var(--control-bg);
+  color: var(--text-primary);
+  outline: none;
+
+  &:focus {
+    border-color: var(--accent-color);
+  }
+}
+
+.listContainer {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.chart {
+  flex: 1;
+  display: flex;
+  padding: 8px;
+  background: var(--bg-primary);
+
+  @include tablet {
+    padding: 16px;
+  }
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.1s;
+
+  &:hover {
+    background: var(--bg-primary);
+  }
+}
+
+.listItemId {
+  color: var(--accent-color);
+  margin-bottom: 2px;
+}
+
+.listItemTitle {
+  color: var(--text-primary);
+  font-size: 10px;
+}
+
+.listItemMeta {
+  color: var(--text-label);
+  font-size: 9px;
+  margin-top: 2px;
+}
+
+.empty {
+  padding: 24px 16px;
+  color: var(--text-label);
+  text-align: center;
+}

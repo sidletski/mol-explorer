@@ -2,43 +2,38 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import type { RootState } from '@/app/store'
 
-import { fetchPdbTitles, searchPdbIds } from './api'
+import { searchPdbIds } from '../search/api'
+import { type EntryDetail, fetchEntryDetails } from './api'
 
-type Entry = { id: string; title: string }
-
-export const searchEntries = createAsyncThunk(
-  'search/searchEntries',
+export const exploreEntries = createAsyncThunk(
+  'explore/exploreEntries',
   async (query: string | undefined, { getState, signal }) => {
-    const state = (getState() as RootState).search
+    const state = (getState() as RootState).explore
     const actualQuery = query ?? state.query
-    // If query is undefined, it means we are loading more entries, so we start from the end of the current list
     const start = query !== undefined ? 0 : state.entries.length
 
     const { ids, totalCount } = await searchPdbIds(actualQuery, start, {
       signal
     })
-    const titles = await fetchPdbTitles(ids, { signal })
+    const entries = await fetchEntryDetails(ids, { signal })
 
-    return {
-      entries: ids.map((id, index) => ({ id, title: titles[index] })),
-      totalCount
-    }
+    return { entries, totalCount }
   }
 )
 
 const initialState = {
   query: '',
   status: 'idle' as 'idle' | 'loading' | 'succeeded' | 'failed',
-  entries: [] as Entry[],
+  entries: [] as EntryDetail[],
   totalCount: 0,
   hasMore: false
 }
 
-export const searchSlice = createSlice({
-  name: 'search',
+export const exploreSlice = createSlice({
+  name: 'explore',
   initialState,
   reducers: {
-    clearSearch: (state) => {
+    clearExplore: (state) => {
       state.entries = []
       state.status = 'idle'
       state.totalCount = 0
@@ -48,28 +43,25 @@ export const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(searchEntries.pending, (state, action) => {
+      .addCase(exploreEntries.pending, (state, action) => {
         const isNewSearch = action.meta.arg !== undefined
         if (isNewSearch) {
           state.query = action.meta.arg!
-          state.status = 'loading'
-        } else {
-          state.status = 'loading'
         }
+        state.status = 'loading'
       })
-      .addCase(searchEntries.fulfilled, (state, action) => {
+      .addCase(exploreEntries.fulfilled, (state, action) => {
         const isNewSearch = action.meta.arg !== undefined
         if (isNewSearch) {
           state.entries = action.payload.entries
-          state.status = 'succeeded'
         } else {
           state.entries.push(...action.payload.entries)
-          state.status = 'succeeded'
         }
         state.totalCount = action.payload.totalCount
         state.hasMore = state.entries.length < action.payload.totalCount
+        state.status = 'succeeded'
       })
-      .addCase(searchEntries.rejected, (state, action) => {
+      .addCase(exploreEntries.rejected, (state, action) => {
         if (action.meta?.aborted) return
         if (action.meta.arg !== undefined) {
           state.entries = []
@@ -81,6 +73,6 @@ export const searchSlice = createSlice({
   }
 })
 
-export const { clearSearch } = searchSlice.actions
+export const { clearExplore } = exploreSlice.actions
 
-export default searchSlice.reducer
+export default exploreSlice.reducer

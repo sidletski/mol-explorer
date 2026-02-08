@@ -87,7 +87,8 @@ export const fetchPdbTitles = async (
     return (
       data?.entries.map(
         (entry) =>
-          entry.polymer_entities[0].rcsb_polymer_entity.pdbx_description
+          entry.polymer_entities?.[0]?.rcsb_polymer_entity.pdbx_description ??
+          null
       ) ?? []
     )
   } catch {

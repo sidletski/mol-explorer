@@ -56,12 +56,19 @@
   overflow-y: auto;
   z-index: 100;
   width: 100%;
+
+  &.withItems {
+    min-height: 150px;
+  }
 }
 
 .option {
   padding: 8px 12px;
   cursor: pointer;
   color: var(--text-primary);
+  white-space: pre;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover,
   &.highlighted {
@@ -76,4 +83,10 @@
 .empty {
   padding: 8px 12px;
   color: var(--text-label);
+}
+
+.loading {
+  padding: 8px 12px;
+  color: var(--text-label);
+  text-align: center;
 }

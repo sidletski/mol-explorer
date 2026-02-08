@@ -2,6 +2,7 @@ import {
   autoUpdate,
   flip,
   offset,
+  type Placement,
   size,
   useClick,
   useDismiss,
@@ -25,6 +26,8 @@ type SelectProps<T> = {
   className?: string
   searchable?: boolean
   placeholder?: string
+  loading?: boolean
+  placement?: Placement
   onChange: (_option: SelectOption<T>) => void
   // Only used if searchable is true
   onSearch?: (_query: string) => void
@@ -39,6 +42,8 @@ export const Select = <T extends string | number = string>({
   className,
   searchable = false,
   placeholder = 'Search...',
+  loading = false,
+  placement = 'bottom-start',
   onChange,
   onSearch,
   onLoadMore
@@ -55,7 +60,7 @@ export const Select = <T extends string | number = string>({
       setIsOpen(open)
       setQuery('')
     },
-    placement: 'bottom-start',
+    placement,
     elements: { reference: referenceEl, floating: floatingEl },
     middleware: [
       offset(4),
@@ -144,33 +149,41 @@ export const Select = <T extends string | number = string>({
   const dropdown = isOpen && (
     <div
       ref={setFloatingEl}
-      className={styles.dropdown}
+      className={clsx(styles.dropdown, {
+        [styles.withItems]: filtered.length > 0
+      })}
       style={floatingStyles}
       {...getFloatingProps()}
       onScroll={handleScroll}
     >
       {filtered.length > 0 ? (
-        filtered.map((option, i) => (
-          <div
-            key={option.value.toString()}
-            className={[
-              styles.option,
-              i === highlightedIndex ? styles.highlighted : '',
-              option.value === value.value ? styles.selected : ''
-            ]
-              .filter(Boolean)
-              .join(' ')}
-            onMouseEnter={() => setHighlightedIndex(i)}
-            onMouseDown={(e) => {
-              e.preventDefault()
-              select(option)
-            }}
-          >
-            {option.label}
-          </div>
-        ))
+        <>
+          {filtered.map((option, i) => (
+            <div
+              key={option.value.toString()}
+              title={option.label}
+              className={[
+                styles.option,
+                i === highlightedIndex ? styles.highlighted : '',
+                option.value === value.value ? styles.selected : ''
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              onMouseEnter={() => setHighlightedIndex(i)}
+              onMouseDown={(e) => {
+                e.preventDefault()
+                select(option)
+              }}
+            >
+              {option.label}
+            </div>
+          ))}
+          {loading && <div className={styles.loading}>Loading...</div>}
+        </>
       ) : (
-        <div className={styles.empty}>No results</div>
+        <div className={styles.empty}>
+          {loading ? 'Loading...' : 'No results'}
+        </div>
       )}
     </div>
   )

@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 
+import exploreReducer from '@/features/explore/slice'
 import searchReducer from '@/features/search/slice'
 
 export const store = configureStore({
   reducer: {
-    search: searchReducer
+    search: searchReducer,
+    explore: exploreReducer
   }
 })
 
