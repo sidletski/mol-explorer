@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { type FC, type UIEvent, useState } from 'react'
+import { type FC, type UIEvent, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { EntryScatterChart } from '@/components/scatter-chart'
@@ -34,6 +34,16 @@ export const Explore: FC = () => {
     }
   }
 
+  const listRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = listRef.current
+    if (!el || !hasMore || status === 'loading') return
+    if (el.scrollHeight <= el.clientHeight) {
+      dispatch(exploreEntries(undefined))
+    }
+  }, [entries, hasMore, status, dispatch])
+
   const [mobileView, setMobileView] = useState<'list' | 'chart'>('list')
 
   const handleEntryClick = (entry: EntryDetail) => {
@@ -65,7 +75,7 @@ export const Explore: FC = () => {
             onChange={(e) => handleSearch(e.target.value)}
           />
         </div>
-        <div className={styles.listContainer} onScroll={handleScroll}>
+        <div ref={listRef} className={styles.listContainer} onScroll={handleScroll}>
           {entries.length > 0 ? (
             <ul className={styles.list}>
               {entries.map((entry) => (
