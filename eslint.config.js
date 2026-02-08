@@ -15,15 +15,15 @@ export default defineConfig([
       js.configs.recommended,
       tseslint.configs.recommended,
       reactHooks.configs.flat.recommended,
-      reactRefresh.configs.vite,
+      reactRefresh.configs.vite
     ],
     plugins: {
       'simple-import-sort': simpleImportSort,
-      import: importPlugin,
+      import: importPlugin
     },
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: globals.browser
     },
     rules: {
       'simple-import-sort/imports': 'error',
@@ -31,8 +31,13 @@ export default defineConfig([
       'import/no-duplicates': ['error', { 'prefer-inline': true }],
       '@typescript-eslint/consistent-type-imports': [
         'error',
-        { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
+        { prefer: 'type-imports', fixStyle: 'inline-type-imports' }
       ],
-    },
-  },
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_' }
+      ]
+    }
+  }
 ])

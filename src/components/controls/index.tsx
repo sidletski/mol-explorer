@@ -118,34 +118,3 @@ export const TextInput: FC<TextInputProps> = ({
   )
 }
 
-type SelectBoxOption = {
-  value: string
-  label: string
-}
-
-type SelectBoxProps = {
-  label: string
-  value: string
-  options: SelectBoxOption[]
-  onChange: (value: string) => void
-}
-
-export const SelectBox: FC<SelectBoxProps> = ({
-  label,
-  value,
-  options,
-  onChange
-}) => {
-  return (
-    <div className={styles.selectBox}>
-      <span className={styles.selectLabel}>{label}</span>
-      <select value={value} onChange={(e) => onChange(e.target.value)}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-    </div>
-  )
-}

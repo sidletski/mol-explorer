@@ -1,0 +1,44 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.main {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.viewer {
+    flex: 1;
+    position: relative;
+    background: var(--bg-primary);
+}
+
+.footer {
+    display: flex;
+    align-items: flex-end;
+    padding: 20px 24px;
+    margin-left: 120px;
+    gap: 32px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.footerCenter {
+    display: flex;
+    align-items: flex-end;
+    gap: 24px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.select {
+    width: 240px;
+}

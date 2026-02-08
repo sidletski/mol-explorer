@@ -1,3 +1,4 @@
+import './env'
 import './index.scss'
 
 import { StrictMode } from 'react'

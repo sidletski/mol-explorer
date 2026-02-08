@@ -7,16 +7,25 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "dependencies": {
+    "@apollo/client": "^4.1.4",
+    "@floating-ui/react": "^0.27.17",
+    "@reduxjs/toolkit": "^2.11.2",
+    "@t3-oss/env-core": "^0.13.10",
+    "clsx": "^2.1.1",
+    "graphql": "^16.12.0",
     "molstar": "^5.6.1",
+    "msw": "^2.12.9",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "react-redux": "^9.2.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
-    "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
@@ -30,7 +39,8 @@
     "sass-embedded": "^1.97.3",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "vite": "npm:rolldown-vite@7.2.5",
+    "vitest": "^4.0.18"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@7.2.5"

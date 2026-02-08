@@ -8,7 +8,7 @@ import styles from './MolViewer.module.scss'
 import { loadStructure } from './utils'
 
 type MolViewerProps = {
-  pdbId: string
+  pdbId?: string
 }
 
 export const MolViewer: FC<MolViewerProps> = ({ pdbId }) => {
@@ -42,8 +42,11 @@ export const MolViewer: FC<MolViewerProps> = ({ pdbId }) => {
       })
 
       pluginRef.current = plugin
-      await loadStructure(plugin, pdbId)
-      initialLoadDone.current = true
+
+      if (pdbId) {
+        await loadStructure(plugin, pdbId)
+        initialLoadDone.current = true
+      }
     }
 
     init()
@@ -57,7 +60,7 @@ export const MolViewer: FC<MolViewerProps> = ({ pdbId }) => {
   }, [])
 
   useEffect(() => {
-    if (!pluginRef.current || !initialLoadDone.current) return
+    if (!pluginRef.current || !initialLoadDone.current || !pdbId) return
 
     pluginRef.current.clear().then(() => {
       if (pluginRef.current) {
