@@ -2,6 +2,8 @@
 
 A molecular structure visualizer built with React and [Mol\*](https://molstar.org/) for exploring proteins from the [RCSB Protein Data Bank](https://www.rcsb.org/). Search for entries by name or PDB ID and view their 3D structures interactively.
 
+Demo is available [here](http://mol-explore.surge.sh/)
+
 ![Viewer](./.github/viewer.png)
 
 ![Explorer](./.github/explorer.png)
